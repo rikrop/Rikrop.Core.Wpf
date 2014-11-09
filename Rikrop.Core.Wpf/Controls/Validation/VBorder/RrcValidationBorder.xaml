@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:VBorder="clr-namespace:Rikrop.Core.Wpf.Controls.Validation.VBorder"
+                    xmlns:Controls="clr-namespace:Rikrop.Core.Wpf.Controls"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
+    <DataTemplate x:Key="DefaultErrorInToolTipTemplate"
+                  DataType="ValidationError">
+        <Controls:RrcTextBlock Text="{Binding ErrorContent, StringFormat='- {0}'}"
+                               FontSize="12"
+                               Margin="2"/>
+    </DataTemplate>
+    
+    <Style TargetType="{x:Type VBorder:RrcValidationBorder}">
+        <Setter Property="Background"
+                Value="{Binding ValidationErrorBrush, RelativeSource={RelativeSource Mode=Self}}" />
+        <Setter Property="Validation.ErrorTemplate"
+                Value="{x:Null}" />
+        <Setter Property="ErrorInToolTipTemplate"
+                Value="{StaticResource DefaultErrorInToolTipTemplate}" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <ToolTip DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+                    <ItemsControl ItemsSource="{Binding (Validation.Errors)}"
+                                  ItemTemplate="{Binding ErrorInToolTipTemplate}"
+                                  d:DataContext="{d:DesignInstance VBorder:RrcValidationBorder}" />
+                </ToolTip>
+            </Setter.Value>
+        </Setter>
+            <Setter Property="Margin"
+                Value="0" />
+        <Style.Triggers>
+            <DataTrigger
+                Binding="{Binding (Validation.Errors).CurrentItem, RelativeSource={RelativeSource Mode=Self}, FallbackValue={x:Null}}"
+                Value="{x:Null}">
+                <Setter Property="Background"
+                        Value="Transparent" />
+                <Setter Property="ToolTip"
+                        Value="{x:Null}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

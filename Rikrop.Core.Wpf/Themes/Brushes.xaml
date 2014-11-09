@@ -1,0 +1,81 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="DefaultDisabledBorderColor">#FFB9B9B9</Color>
+    <SolidColorBrush x:Key="DefaultDisabledBorderBrush"
+                     Color="{StaticResource DefaultDisabledBorderColor}" />
+
+    <Color x:Key="ButtonBorderColor">#ff414041</Color>
+    <SolidColorBrush x:Key="ButtonBorderBrush"
+                     Color="{StaticResource ButtonBorderColor}" />
+
+    <Color x:Key="DefaultFontColor">#ff333333</Color>
+    <SolidColorBrush x:Key="DefaultFontBrush"
+                     Color="{StaticResource DefaultFontColor}" />
+
+    <Color x:Key="ExpanderHeaderMouseOverColor">#E7E7E7</Color>
+    <SolidColorBrush x:Key="ExpanderHeaderMouseOverBrush"
+                     Color="{StaticResource ExpanderHeaderMouseOverColor}" />
+
+    <Color x:Key="DefaultBorderColor">Gray</Color>
+    <SolidColorBrush x:Key="DefaultBorderBrush"
+                     Color="{StaticResource DefaultBorderColor}" />
+
+    <Color x:Key="DefaultDisabledFontColor">LightGray</Color>
+    <SolidColorBrush Color="{StaticResource DefaultDisabledFontColor}"
+                     x:Key="DefaultDisabledFontBrush" />
+    
+    <Color x:Key="HeaderBackgroundColor">#0E000000</Color>
+    <SolidColorBrush x:Key="HeaderBackgroundBrush"
+                     Color="{StaticResource HeaderBackgroundColor}" />
+    
+    <Color x:Key="DefaultBackgroundColor">White</Color>
+    <SolidColorBrush x:Key="DefaultBackgroundBrush" 
+                     Color="{StaticResource DefaultBackgroundColor}"/>
+
+    <LinearGradientBrush x:Key="TabItemHotBackground"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <!--GradientStop Color="#EAF6FD"
+                          Offset="0.15" /-->
+            <GradientStop Color="#FFF4F4F4"
+                          Offset=".5" />
+            <GradientStop Color="#FFE5E5E5"
+                          Offset=".5" />
+            <GradientStop Color="#FFCBC9C8"
+                          Offset="1" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <Color x:Key="ItemDefaultBackgroundColor">White</Color>
+    <SolidColorBrush x:Key="ItemDefaultBackgroundBrush"
+                     Color="{StaticResource DefaultBackgroundColor}" />
+
+    <Color x:Key="ItemAlternatedBackgroundColor">WhiteSmoke</Color>
+    <SolidColorBrush x:Key="ItemAlternatedBackgroundBrush"
+                     Color="{StaticResource ItemAlternatedBackgroundColor}" />
+
+    <Color x:Key="ItemSelectedBackgroundColor">#E6E6E6</Color>
+    <SolidColorBrush x:Key="ItemSelectedBackgroundBrush"
+                     Color="{StaticResource ItemSelectedBackgroundColor}" />
+
+    <Color x:Key="GridDelimiterColor">#FFBDCCD4</Color>
+    <SolidColorBrush x:Key="GridDelimiterBrush"
+                     Color="{StaticResource GridDelimiterColor}" />
+
+    <Color x:Key="VerticalDataGridLineColor">#FFFFFFFF</Color>
+    <SolidColorBrush x:Key="VerticalDataGridLineBrush"
+                     Color="{StaticResource VerticalDataGridLineColor}" />
+
+    <Color x:Key="DataGridHighlightColor">#FF29ABE2</Color>
+    <SolidColorBrush x:Key="DataGridHighlightBrush"
+                     Color="{StaticResource DataGridHighlightColor}"
+                     Opacity="0.2" />
+
+    <Color x:Key="DataGridUnevenRowBackgroundColor">#FFBDCCD4</Color>
+    <SolidColorBrush x:Key="DataGridUnevenRowBackgroundBrush"
+                     Color="{StaticResource DataGridUnevenRowBackgroundColor}"
+                     Opacity="0.25" />
+
+</ResourceDictionary>

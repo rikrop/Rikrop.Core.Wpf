@@ -1,0 +1,137 @@
+﻿<Window x:Class="Rikrop.Core.Wpf.Controls.ErrorReport.ErrorReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:RrcControls="clr-namespace:Rikrop.Core.Wpf.Controls"
+        xmlns:ErrorReport="clr-namespace:Rikrop.Core.Wpf.Controls.ErrorReport"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="{Binding DisplayName}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="ToolWindow"
+        SizeToContent="Height"
+        MinHeight="200"
+        MinWidth="500"
+        ScrollViewer.CanContentScroll="False"
+        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        ScrollViewer.VerticalScrollBarVisibility="Disabled"
+        d:DataContext="{d:DesignInstance ErrorReport:ErrorReportWorkspace}">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="ExpanderConverter" />
+    </Window.Resources>
+        <Grid HorizontalAlignment="Stretch"
+              ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"
+                  HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Row="0"
+                       Grid.Column="0"
+                       Margin="5"
+                       Width="30"
+                       Height="30" />
+
+                <RrcControls:RrcTextBlock Grid.Row="0"
+                                          Grid.Column="1"
+                                          Margin="5"
+                                          Foreground="Blue"
+                                          FontSize="16"
+                                          FontFamily="Segoe UI"
+                                          TextWrapping="Wrap"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Top"
+                                          Text="Произошла критическая ошибка. Вы хотите отправить информацию об ошибке для скорейшего устранения проблемы?" />
+                <RrcControls:RrcTextBlock Grid.Row="1"
+                                          Grid.Column="1"
+                                          Margin="5"
+                                          FontFamily="Segoe UI"
+                                          Text="{Binding HandledException.Exception.Message}"
+                                          TextWrapping="Wrap" />
+            </Grid>
+            <Grid Grid.Row="1"
+                  VerticalAlignment="Bottom"
+                  ShowGridLines="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <RrcControls:RrcExpander x:Name="expander"
+                                         Grid.Row="2"
+                                         VerticalAlignment="Center"
+                                         IsExpanded="False"
+                                         Expanded="expander_Expanded"
+                                         Collapsed="expander_Collapsed"
+                                     ExpandedHeader="Спрятать детали"
+                                     CollapsedHeader="Показать детали">
+                </RrcControls:RrcExpander>
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <RrcControls:RrcButton Margin="5"
+                                           Content="Закрыть"
+                                           Command="{Binding CloseCommand}"
+                                           IsCancel="True" />
+                    <RrcControls:RrcButton Margin="5"
+                                           Content="Завершить работу"
+                                           Command="{Binding CloseApplicationCommand}" />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="2"
+                  Visibility="{Binding ElementName=expander, 
+                                   Path=IsExpanded, 
+                                   Converter={StaticResource ExpanderConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="3" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <HierarchicalDataTemplate x:Key="sectionTemplate"
+                                              DataType="{x:Type ErrorReport:ExceptionModel}"
+                                              ItemsSource="{Binding ChildExceptions,
+                                                                Mode=OneWay}">
+                        <TextBlock Text="{Binding Path=TypeName}" />
+                    </HierarchicalDataTemplate>
+                </Grid.Resources>
+                <RrcControls:RrcTreeView x:Name="twExceptions"
+                                         Grid.Column="0"
+                                         Margin="5"
+                                         ItemsSource="{Binding HandledExceptions}"
+                                         ItemTemplate="{StaticResource sectionTemplate}" />
+                <GridSplitter Grid.Column="1"
+                              HorizontalAlignment="Stretch" />
+                <Grid Grid.Column="2"
+                      DataContext="{Binding ElementName=twExceptions, 
+                                        Path=SelectedItem}"
+                  d:DataContext="{d:DesignInstance ErrorReport:ExceptionModel}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <RrcControls:RrcTextBlock Grid.Row="0"
+                                              Text="{Binding Exception.Message}"
+                                              Margin="5"
+                                              TextWrapping="Wrap" />
+                    <RrcControls:RrcTextBox x:Name="tb"
+                                            Grid.Row="1"
+                                            Margin="5"
+                                            VerticalScrollBarVisibility="Auto"
+                                            HorizontalScrollBarVisibility="Auto"
+                                            IsReadOnly="True"
+                                            TextWrapping="Wrap"
+                                            Text="{Binding Exception, Mode=OneWay}" />
+                </Grid>
+            </Grid>
+        </Grid>
+</Window>

@@ -1,0 +1,56 @@
+﻿<Window x:Class="Rikrop.Core.Wpf.TestApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:TestApplication="clr-namespace:Rikrop.Core.Wpf.TestApplication"
+        xmlns:wpf="http://Rikrop/Core/wpf/"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid wpf:RrcBusyIndicator.IsBusy="True">
+        <!--<Controls:ApiFaviconViewer Url="http://ya.ru"/>-->
+        
+        <!--<Controls:ApiImageBrushButton Height="20"
+                                      Width="20"
+                                      Background="Aqua">
+            <Controls:ApiImageBrushButton.ImageBrush>
+                <VisualBrush Stretch="Uniform">
+                    <VisualBrush.Visual>
+                        <Rectangle Height="10"
+                                   Width="6"
+                                   Fill="Black"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Controls:ApiImageBrushButton.ImageBrush>
+        </Controls:ApiImageBrushButton>-->
+        
+        <wpf:RrcPopupDialog IsOpen="True">
+            <wpf:RrcPopupDialog.PopupContent>
+                <StackPanel>
+                    <Label Content="{x:Static TestApplication:TestEnum.Test}"></Label>
+                    <CheckBox IsChecked="{Binding IsActive, Mode=TwoWay}"
+                              Content="isActive"/>
+                    <CheckBox Content="bool"
+                              x:Name="_bo"/>
+                    <Button Content="hello"
+                            CommandParameter="{Binding ElementName=_bo, Path=IsChecked}"
+                            Command="{Binding Command}"/>
+                </StackPanel>
+            </wpf:RrcPopupDialog.PopupContent>
+            <wpf:RrcPopupDialog.PopupBorderEffect>
+                <DropShadowEffect BlurRadius="20"
+                                  ShadowDepth="0"
+                                  Color="#10b4fd" />
+            </wpf:RrcPopupDialog.PopupBorderEffect>
+            <StackPanel VerticalAlignment="Center">
+                <wpf:RrcTextBox VerticalAlignment="Center"
+                                     Watermark="Тыкните сюда для поиска" />
+                <wpf:RrcTextBox VerticalAlignment="Center"
+                                     Watermark="Тыкните сюда для поиска" />
+            </StackPanel>
+        </wpf:RrcPopupDialog>
+
+        <!--<Controls:ApiBusyIndicator>
+            <Rectangle Height="100"
+                       Width="100"
+                       Fill="Tomato"/>
+        </Controls:ApiBusyIndicator>-->
+    </Grid>
+</Window>

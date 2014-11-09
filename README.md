@@ -1,0 +1,2 @@
+Rikrop.Core.Framework
+=====================

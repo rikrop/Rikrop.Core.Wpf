@@ -1,0 +1,605 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+                    xmlns:RangeFilters="clr-namespace:Rikrop.Core.Wpf.Controls.Filters.RangeFilters"
+                    xmlns:Controls="clr-namespace:Rikrop.Core.Wpf.Controls"
+                    xmlns:Validation="clr-namespace:Rikrop.Core.Wpf.Mvvm.Validation"
+                    xmlns:Converters="clr-namespace:Rikrop.Core.Wpf.Converters">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Rikrop.Core.Wpf;component/Themes/CommonResources.xaml" />
+        <ResourceDictionary Source="/Rikrop.Core.Wpf;component/Themes/Styles/ScrollBar.xaml" />
+        <ResourceDictionary Source="/Rikrop.Core.Wpf;component/Themes/Brushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Color x:Key="ControlMouseOverColor">#FF3843C4</Color>
+    <Color x:Key="ControlPressedColor">#FF211AA9</Color>
+
+    <!--<SolidColorBrush x:Key="AlternatingRowBrush"
+                     Color="#EEF1F4" />-->
+
+    <DataTemplate x:Key="SortedAscImage">
+        <Viewbox>
+            <Canvas Width="31.334"
+                    Height="16.167">
+
+                <Canvas>
+
+                    <!-- Layer 1/<Path> -->
+                    <Path StrokeThickness="1.0"
+                          Stroke="#ff808080"
+                          StrokeStartLineCap="Round"
+                          StrokeEndLineCap="Round"
+                          StrokeLineJoin="Round"
+                          Fill="#ff808080"
+                          Data="F1 M 15.667,0.500 L 30.834,15.667 L 0.500,15.667 L 15.667,0.500 Z" />
+
+                </Canvas>
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SortedDescImage">
+        <Viewbox>
+            <Canvas Width="31.334"
+                    Height="16.167">
+
+                <Canvas>
+
+                    <!-- Layer 1/<Path> -->
+                    <Path StrokeThickness="1.0"
+                          Stroke="#ff808080"
+                          StrokeStartLineCap="Round"
+                          StrokeEndLineCap="Round"
+                          StrokeLineJoin="Round"
+                          Fill="#ff808080"
+                          Data="F1 M 15.667,15.667 L 0.500,0.500 L 30.834,0.500 L 15.667,15.667 Z" />
+
+                </Canvas>
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="UnsortedImage">
+        <Viewbox>
+            <Canvas Width="24.436"
+                    Height="31.935">
+
+                <Canvas>
+
+                    <Canvas>
+
+                        <!-- Layer 1/<Group>/<Path> -->
+                        <Path Fill="#ffb2b7be"
+                              Data="F1 M 23.779,21.201 L 13.703,31.277 C 13.265,31.716 12.685,31.935 12.114,31.935 C 11.536,31.935 10.961,31.716 10.520,31.277 L 0.661,21.421 C -0.220,20.539 -0.220,19.112 0.661,18.238 C 1.542,17.355 2.962,17.355 3.845,18.231 L 12.114,26.501 L 20.596,18.020 C 21.476,17.144 22.899,17.144 23.779,18.020 C 24.655,18.898 24.655,20.322 23.779,21.201 Z" />
+
+                        <!-- Layer 1/<Group>/<Path> -->
+                        <Path Fill="#ffb2b7be"
+                              Data="F1 M 0.656,10.733 L 10.732,0.657 C 11.170,0.219 11.750,0.000 12.321,0.000 C 12.900,0.000 13.473,0.219 13.917,0.657 L 23.775,10.514 C 24.655,11.395 24.655,12.822 23.775,13.696 C 22.894,14.579 21.472,14.579 20.591,13.704 L 12.321,5.434 L 3.840,13.916 C 2.959,14.791 1.537,14.791 0.656,13.916 C -0.218,13.036 -0.218,11.612 0.656,10.733 Z" />
+
+                    </Canvas>
+
+                </Canvas>
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+
+    <Converters:IsAssignableFromConverter x:Key="IsAssignableFromConverter" />
+    <Converters:StringIsNullOrEmptyConverter x:Key="StringIsNullOrEmptyConverter" />
+    
+    <Style TargetType="{x:Type RangeFilters:RangeFilterView}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RangeFilters:RangeFilterView}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Grid.Row="0"
+                                   Margin="2,0,0,0"
+                                   VerticalAlignment="Center"
+                                   Text="С:" />
+                        <ContentPresenter x:Name="fromContent"
+                                          Grid.Column="1"
+                                          Grid.Row="0"
+                                          Margin="2"
+                                          Content="{TemplateBinding FromContent}" />
+                        <TextBlock Grid.Column="0"
+                                   Grid.Row="1"
+                                   Margin="2,0,0,0"
+                                   VerticalAlignment="Center"
+                                   Text="По:" />
+                        <ContentPresenter Grid.Column="1"
+                                          Grid.Row="1"
+                                          Margin="2"
+                                          Content="{TemplateBinding ToContent}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ColumnHeaderGripperStyle"
+           TargetType="{x:Type Thumb}">
+        <Setter Property="Width"
+                Value="8" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Cursor"
+                Value="SizeWE" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ColumnHeaderStyle"
+           TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="Background"
+                Value="{StaticResource DefaultBackgroundBrush}" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border Background="{TemplateBinding Background}" 
+                                Grid.ColumnSpan="3"/>
+                        <Border x:Name="mouseOverOverlay"
+                                Background="Transparent"
+                                Grid.ColumnSpan="3" />
+
+                        <Themes:DataGridHeaderBorder x:Name="headerBorder"
+                                                     Grid.ColumnSpan="3"
+                                                     SortDirection="{TemplateBinding SortDirection}"
+                                                     IsHovered="{TemplateBinding IsMouseOver}"
+                                                     IsPressed="{TemplateBinding IsPressed}"
+                                                     IsClickable="{TemplateBinding CanUserSort}"
+                                                     Background="Transparent"
+                                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                                     BorderThickness="{TemplateBinding BorderThickness}"
+                                                     Padding="{TemplateBinding Padding}"
+                                                     SeparatorVisibility="{TemplateBinding SeparatorVisibility}"
+                                                     SeparatorBrush="{TemplateBinding SeparatorBrush}" />
+                        <ContentPresenter Grid.Column="0"
+                                          Margin="5,4,2,4"
+                                          ContentSource="Content"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        <ContentPresenter x:Name="sortIcon"
+                                            Grid.Column="1"
+                                            Width="10"
+                                            Margin="4,2,2,4"
+                                            Content="{x:Null}"
+                                            VerticalAlignment="Center"
+                                            IsHitTestVisible="False"/>
+                        
+                        <Thumb x:Name="PART_LeftHeaderGripper"
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource ColumnHeaderGripperStyle}" />
+                        <Thumb x:Name="PART_RightHeaderGripper"
+                                HorizontalAlignment="Right"
+                                Grid.Column="2"
+                                Style="{StaticResource ColumnHeaderGripperStyle}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="DisplayIndex"
+                                 Value="0">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed"
+                                    TargetName="PART_LeftHeaderGripper">
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="mouseOverOverlay"
+                                    Property="Background"
+                                    Value="{StaticResource DataGridHighlightBrush}" />
+                        </Trigger>
+                        <Trigger Property="SortDirection"
+                                 Value="Ascending">
+                            <Setter TargetName="sortIcon"
+                                    Property="ContentTemplate"
+                                    Value="{StaticResource SortedAscImage}" />
+                        </Trigger>
+                        <Trigger Property="SortDirection"
+                                 Value="Descending">
+                            <Setter TargetName="sortIcon"
+                                    Property="ContentTemplate"
+                                    Value="{StaticResource SortedDescImage}" />
+                        </Trigger>
+                        <Trigger Property="SortDirection"
+                                 Value="{x:Null}">
+                            <Setter TargetName="sortIcon"
+                                    Property="ContentTemplate"
+                                    Value="{StaticResource UnsortedImage}" />
+                        </Trigger>
+                        <Trigger Property="CanUserSort"
+                                 Value="False">
+                            <Setter TargetName="sortIcon"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AlignmentColumnHeaderStyle" 
+           BasedOn="{StaticResource ColumnHeaderStyle}" 
+           TargetType="DataGridColumnHeader">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="RrcDataGridRowStyle" TargetType="{x:Type DataGridRow}">
+        <Setter Property="Padding"
+                Value="4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridRow}">
+                    <Border x:Name="DGR_Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <SelectiveScrollingGrid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Border x:Name="alternatingBorder"
+                                    Grid.ColumnSpan="2"
+                                    Grid.RowSpan="2"/>
+                            <Border x:Name="errorBorder"
+                                    Grid.ColumnSpan="2"
+                                    Grid.RowSpan="2" />
+
+                            <DataGridCellsPresenter x:Name="cellsPresenter"
+                                                    Grid.Column="1"
+                                                    ItemsPanel="{TemplateBinding ItemsPanel}"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                            <DataGridDetailsPresenter  SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=AreRowDetailsFrozen, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}}"
+                                                       Grid.Column="1"
+                                                       Grid.Row="1"
+                                                       Visibility="{TemplateBinding DetailsVisibility}"
+                                                       Margin="{TemplateBinding Padding}" />
+
+                            <DataGridRowHeader SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                               Grid.RowSpan="2"
+                                               Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=HeadersVisibility, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.Row}}"
+                                               Margin="{TemplateBinding Padding}" />
+                        </SelectiveScrollingGrid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="AlternationIndex"
+                                 Value="1">
+                            <Setter TargetName="alternatingBorder"
+                                    Property="Background"
+                                    Value="{StaticResource DataGridUnevenRowBackgroundBrush}" />
+                        </Trigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Converter={StaticResource IsAssignableFromConverter}, ConverterParameter={x:Type Validation:DataValidationInfo}}"
+                                           Value="True" />
+                                <Condition Binding="{Binding Error, Converter={StaticResource StringIsNullOrEmptyConverter}}"
+                                           Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="errorBorder"
+                                    Property="Background"
+                                    Value="#33FF0000" />
+                            <Setter Property="ToolTip"
+                                    Value="{Binding Error}" />
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RrcDataGridCellStyle"
+           TargetType="{x:Type DataGridCell}">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Padding"
+                Value="4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="Center"
+                                          Margin="{TemplateBinding Padding}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsSelected"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="{StaticResource DataGridHighlightBrush}" />
+                <Setter Property="Foreground"
+                        Value="Black" />
+                <Setter Property="BorderBrush"
+                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsKeyboardFocusWithin"
+                     Value="True">
+                <Setter Property="BorderBrush"
+                        Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="RrcDataGridRowHeaderStyle"
+           TargetType="{x:Type DataGridRowHeader}">
+        <Setter Property="BorderThickness"
+                Value="0,0,1,0" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource DefaultBackgroundBrush}" />
+        <Setter Property="Background"
+                Value="Transparent" />
+    </Style>
+
+    <Style x:Key="DefaultRrcDataGridStyle" TargetType="{x:Type Controls:RrcDataGrid}">
+        <Style.Resources>
+            <!-->Этот стиль юзается в коде<-->
+            <Style x:Key="WatermarkTextBlockStyle"
+                   TargetType="TextBlock">
+                <Setter Property="Foreground"
+                        Value="Gray" />
+                <Setter Property="FontStyle"
+                        Value="Italic" />
+            </Style>
+        </Style.Resources>
+        <Setter Property="EnableColumnVirtualization"
+                Value="True" />
+        <Setter Property="SelectionMode"
+                Value="Single" />
+        <Setter Property="EnableRowVirtualization"
+                Value="True" />
+        <Setter Property="FocusVisualStyle"
+                Value="{x:Null}" />
+        <Setter Property="HorizontalScrollBarVisibility"
+                Value="Disabled" />
+        <Setter Property="RowHeaderStyle"
+                Value="{StaticResource RrcDataGridRowHeaderStyle}" />
+        <Setter Property="CellStyle"
+                Value="{StaticResource RrcDataGridCellStyle}" />
+        <Setter Property="RowStyle"
+                Value="{StaticResource RrcDataGridRowStyle}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource DefaultBorderBrush}" />
+        <Setter Property="VerticalGridLinesBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="RowDetailsVisibilityMode"
+                Value="VisibleWhenSelected" />
+        <Setter Property="ScrollViewer.CanContentScroll"
+                Value="True" />
+        <Setter Property="VirtualizingPanel.IsVirtualizing"
+                Value="True" />
+        <Setter Property="ScrollViewer.PanningMode"
+                Value="Both" />
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
+                Value="True" />
+        <Setter Property="Stylus.IsFlicksEnabled"
+                Value="False" />
+        <Setter Property="VerticalGridLinesBrush"
+                Value="{StaticResource VerticalDataGridLineBrush}" />
+        <Setter Property="AutoGenerateColumns"
+                Value="False" />
+        <Setter Property="HeadersVisibility"
+                Value="Column" />
+        <Setter Property="RowHeaderWidth"
+                Value="0" />
+        <Setter Property="CanUserAddRows"
+                Value="False" />
+        <Setter Property="CanUserResizeRows"
+                Value="False" />
+        <Setter Property="CanUserDeleteRows"
+                Value="False" />
+        <Setter Property="GridLinesVisibility"
+                Value="Vertical" />
+        <Setter Property="AlternationCount"
+                Value="2" />
+        <Setter Property="IsReadOnly"
+                Value="True" />
+        <Setter Property="ColumnHeaderStyle"
+                Value="{StaticResource ColumnHeaderStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Controls:RrcDataGrid}">
+                    <Border x:Name="border"
+                            SnapsToDevicePixels="True"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border.Background>
+                            <SolidColorBrush Color="{DynamicResource ControlLightColor}" />
+                        </Border.Background>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="border"
+                                                                      Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="{DynamicResource ControlLightColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Normal" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ScrollViewer x:Name="DG_ScrollViewer"
+                                      Focusable="false"
+                                      Background="Black">
+                            <ScrollViewer.Template>
+                                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <Line Grid.Row="0"
+                                              Grid.Column="0"
+                                              Grid.ColumnSpan="3"
+                                              X2="1"
+                                              Stretch="Fill"
+                                              StrokeThickness="1"
+                                              Stroke="{StaticResource DefaultDisabledBorderBrush}"
+                                              Visibility="{Binding HeadersVisibility, 
+                                                                    ConverterParameter={x:Static DataGridHeadersVisibility.Column}, 
+                                                                    Converter={x:Static DataGrid.HeadersVisibilityConverter}, 
+                                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+
+                                        <Border Grid.Row="2"
+                                                Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                Visibility="{Binding HeadersVisibility, 
+                                                                    ConverterParameter={x:Static DataGridHeadersVisibility.Column}, 
+                                                                    Converter={x:Static DataGrid.HeadersVisibilityConverter}, 
+                                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                            <ContentPresenter Content="{Binding TopLeftContent, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                              ContentTemplate="{Binding TopLeftContentTemplate, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                              Margin="4" />
+                                        </Border>
+
+                                        <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" 
+                                                                    Grid.Row="2"
+                                                                    Grid.Column="1"
+                                                                    Visibility="{Binding HeadersVisibility, 
+                                                                    ConverterParameter={x:Static DataGridHeadersVisibility.Column}, 
+                                                                    Converter={x:Static DataGrid.HeadersVisibilityConverter}, 
+                                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                        <Line Grid.Row="3"
+                                              Grid.Column="0"
+                                              Grid.ColumnSpan="3"
+                                              X2="1"
+                                              Stretch="Fill"
+                                              StrokeThickness="1"
+                                              Stroke="{StaticResource DefaultDisabledBorderBrush}"
+                                              Visibility="{Binding HeadersVisibility, 
+                                                                    ConverterParameter={x:Static DataGridHeadersVisibility.Column}, 
+                                                                    Converter={x:Static DataGrid.HeadersVisibilityConverter}, 
+                                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+
+                                        <Controls:RrcBusyIndicator x:Name="BusyIndicator"
+                                                                   Grid.Row="4"
+                                                                   Grid.ColumnSpan="2"
+                                                                   IsBusy="{Binding IsLoading, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcDataGrid}}}"
+                                                                   DisplayAfter="{Binding DisplayAfter, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcDataGrid}}}">
+                                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                                    CanContentScroll="{TemplateBinding CanContentScroll}" />
+                                        </Controls:RrcBusyIndicator>
+
+                                        <ScrollBar x:Name="PART_VerticalScrollBar"
+                                                   Grid.Column="2"
+                                                   Grid.Row="4"
+                                                   Orientation="Vertical"
+                                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                                        <Grid Name="grd"
+                                            Grid.Column="1"
+                                            Grid.Row="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                                       Grid.Column="1"
+                                                       Orientation="Horizontal"
+                                                       ViewportSize="{TemplateBinding ViewportWidth}"
+                                                       Maximum="{TemplateBinding ScrollableWidth}"
+                                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                                       Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </Grid>
+
+
+                                        <Canvas Name="PART_CanvasForVerticalLines"
+                                                Background="Transparent"
+                                                Grid.Column="1"
+                                                Grid.Row="1"
+                                                Grid.RowSpan="4"
+                                                IsHitTestVisible="False"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </ScrollViewer.Template>
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource DefaultRrcDataGridStyle}"
+           TargetType="{x:Type Controls:RrcDataGrid}" />
+
+    <ContextMenu x:Key="RrcDataGridRowContextMenu"
+                 Style="{StaticResource ContextMenuStyle}"
+                 DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+        <MenuItem Header="Открыть в новом окне"
+                  CommandParameter="True"
+                  Command="{Binding CellDoubleClickCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Controls:RrcDataGrid}}" />
+    </ContextMenu>
+    
+    <Style x:Key="DataGridRowStyleContextMenu"
+           BasedOn="{StaticResource RrcDataGridRowStyle}"
+           TargetType="{x:Type DataGridRow}">
+        <Setter Property="ContextMenu"
+                Value="{StaticResource RrcDataGridRowContextMenu}" />
+    </Style>
+
+</ResourceDictionary> 

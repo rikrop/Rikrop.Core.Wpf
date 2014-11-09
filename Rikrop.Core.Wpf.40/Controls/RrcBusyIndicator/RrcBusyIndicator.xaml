@@ -1,0 +1,177 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Controls="clr-namespace:Rikrop.Core.Wpf.Controls"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">      
+    
+    <Style TargetType="{x:Type Controls:RrcBusyIndicator}">
+
+        <Setter Property="RrcLoadingIndicatorStyle">
+            <Setter.Value>
+                <Style TargetType="Controls:RrcLoadingIndicator">
+                    <Setter Property="Height"
+                            Value="16" />
+                    <Setter Property="Width"
+                            Value="16" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="OverlayStyle">
+            <Setter.Value>
+                <Style TargetType="Rectangle">
+                    <Setter Property="Fill"
+                            Value="White" />
+                    <Setter Property="Opacity"
+                            Value="0.5" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="BusyContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Center"
+                          VerticalAlignment="Center">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ContentPresenter
+                                Content="{Binding Path=BusyContent,RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcBusyIndicator}}}">                                                               
+                                <ContentPresenter.Visibility>
+                                    <Binding Path="BusyContent" RelativeSource="{RelativeSource AncestorType={x:Type Controls:RrcBusyIndicator}}">
+                                        <Binding.Converter>
+                                            <BooleanToVisibilityConverter/>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </ContentPresenter.Visibility>
+                            </ContentPresenter>
+                            <Controls:RrcLoadingIndicator Grid.Row="1"
+                                                          Style="{Binding Path=RrcLoadingIndicatorStyle, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcBusyIndicator}}}"
+                                                          IsLoading="{Binding Path=IsBusy, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcBusyIndicator}}}" />
+
+                        </Grid>
+
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="IsTabStop"
+                Value="False" />
+        <Setter Property="Focusable"
+                Value="False" />
+        <Setter Property="DisplayAfter"
+                Value="00:00:00.1" />
+        <Setter Property="HorizontalAlignment"
+                Value="Stretch" />
+        <Setter Property="VerticalAlignment"
+                Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Controls:RrcBusyIndicator}">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="VisibilityStates">
+                                <VisualState x:Name="Hidden">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                                       Duration="00:00:00.001"
+                                                                       Storyboard.TargetName="busycontent"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                                       Duration="00:00:00.001"
+                                                                       Storyboard.TargetName="overlay"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Visible">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                                       Duration="00:00:00.001"
+                                                                       Storyboard.TargetName="busycontent"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                                       Duration="00:00:00.001"
+                                                                       Storyboard.TargetName="overlay"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="BusyStatusStates">
+                                <VisualState x:Name="Idle">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                                       Duration="00:00:00.001"
+                                                                       Storyboard.TargetName="content"
+                                                                       Storyboard.TargetProperty="(Control.IsEnabled)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <sys:Boolean>True</sys:Boolean>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Busy">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                                       Duration="00:00:00.001"
+                                                                       Storyboard.TargetName="content"
+                                                                       Storyboard.TargetProperty="(Control.IsEnabled)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <sys:Boolean>False</sys:Boolean>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentControl x:Name="content"
+                                        Content="{TemplateBinding Content}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        KeyboardNavigation.IsTabStop="False" />
+                        <Rectangle x:Name="overlay"
+                                   Style="{TemplateBinding OverlayStyle}" />
+                        <ContentPresenter x:Name="busycontent"
+                                          KeyboardNavigation.IsTabStop="False"
+                                          ContentTemplate="{TemplateBinding BusyContentTemplate}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

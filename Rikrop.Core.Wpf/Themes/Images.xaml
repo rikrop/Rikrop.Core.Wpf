@@ -1,0 +1,84 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DataTemplate x:Key="AddImage" >
+        <Viewbox>
+            <Canvas Width="20"
+                    Height="20"
+                    HorizontalAlignment="Center">
+                <Path Width="21.123"
+                      Height="2.666"
+                      Canvas.Left="-0.562"
+                      Canvas.Top="8.622"
+                      Stretch="Fill"
+                      StrokeThickness="2.66667"
+                      StrokeMiterLimit="2.75"
+                      Stroke="#FF333333"
+                      Data="F1 M 23.7904,14.5144L 5.33333,14.5144" />
+                <Path Width="2.693"
+                      Height="20.988"
+                      Canvas.Left="8.666"
+                      Stretch="Fill"
+                      StrokeThickness="2.66667"
+                      StrokeMiterLimit="2.75"
+                      Stroke="#FF333333"
+                      Data="F1 M 14.5879,5.33333L 14.5618,23.6569"
+                      Canvas.Top="-0.558" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DeleteImage">
+        <Viewbox HorizontalAlignment="Center">
+            <Canvas Width="24.000"
+                    Height="32.000">
+                <Path Fill="#ff414041"
+                      Data="F1 M 23.943,6.385 L 0.000,6.385 L 0.000,4.390 L 23.943,4.390 L 23.943,6.385 Z" />
+                <Path Fill="#ff414041"
+                      Data="F1 M 15.962,0.000 L 7.981,0.000 L 7.981,2.793 L 15.962,2.793 L 15.962,0.000 Z" />
+                <Path Fill="#ff414041"
+                      Data="F1 M 18.755,29.132 L 15.962,29.132 L 15.962,10.774 L 18.755,10.774 L 18.755,29.132 Z M 13.169,29.132 L 10.774,29.132 L 10.774,10.774 L 13.169,10.774 L 13.169,29.132 Z M 7.981,29.132 L 5.187,29.132 L 5.187,10.774 L 7.981,10.774 L 7.981,29.132 Z M 21.279,7.980 C 21.279,7.980 2.679,7.998 2.660,7.980 C 2.637,7.961 2.629,31.899 2.660,31.922 C 2.587,31.938 21.279,31.922 21.279,31.922 C 21.233,31.928 21.279,7.980 21.279,7.980 Z" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RefreshImage">
+        <Viewbox>
+            <Canvas Width="32.000"
+                    Height="32.000">
+                <Path Fill="#ff414041"
+                      Data="F1 M 31.926,18.030 C 31.926,25.030 24.857,32.095 16.134,32.095 C 7.411,32.095 0.000,25.358 0.000,17.331 C 0.000,9.470 6.912,2.735 14.912,2.478 L 14.912,0.000 L 25.365,4.460 L 14.912,9.415 L 14.912,6.938 C 9.912,7.201 4.846,11.701 4.846,17.095 C 4.846,22.661 9.917,27.513 15.963,27.513 C 22.011,27.513 27.047,23.030 27.047,18.030 L 27.070,18.030 L 31.920,18.030 L 31.926,18.030 Z" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="EditImage">
+        <Viewbox>
+            <Canvas Width="32.000"
+                    Height="32.000">
+                <Path Fill="#ff414041"
+                      Data="F1 M 4.910,22.346 L 20.255,7.056 L 24.975,11.762 L 9.632,27.050 L 4.910,22.346 Z" />
+
+                <Path Fill="#ff414041"
+                      Data="F1 M 27.336,9.409 L 22.614,4.705 L 27.336,0.000 L 32.057,4.705" />
+
+                <Path Fill="#ff414041"
+                      Data="F1 M 2.551,24.700 L 7.272,29.405 L 0.000,31.756 L 2.551,24.700 Z" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CloseIcon">
+        <Viewbox>
+            <Canvas Width="11.521"
+                    Height="11.405">
+                <Canvas>
+                    <Path Fill="Gray"
+                          Data="F1 M 11.521,9.229 L 7.993,5.703 L 11.521,2.176 L 11.521,0.000 L 9.174,0.000 L 5.733,3.442 L 2.292,0.000 L 0.000,0.000 L 0.000,2.233 L 3.472,5.703 L 0.000,9.173 L 0.000,11.405 L 2.292,11.405 L 5.733,7.964 L 9.174,11.405 L 11.521,11.405 L 11.521,9.229 Z" />
+
+                </Canvas>
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+
+</ResourceDictionary>

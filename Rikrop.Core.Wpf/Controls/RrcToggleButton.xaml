@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Controls="clr-namespace:Rikrop.Core.Wpf.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Rikrop.Core.Wpf;component/Themes/Brushes.xaml" />
+        <ResourceDictionary Source="/Rikrop.Core.Wpf;component/Themes/ButtonStyles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type Controls:RrcToggleButton}"
+           BasedOn="{StaticResource CommonToggleButtonStyle}">
+    </Style>
+</ResourceDictionary>

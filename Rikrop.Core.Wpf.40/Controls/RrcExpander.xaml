@@ -1,0 +1,342 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Controls="clr-namespace:Rikrop.Core.Wpf.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Rikrop.Core.Wpf;component/Themes/Brushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate x:Key="DoubleUpArrowImageTemplate">
+        <Viewbox>
+            <Canvas Width="20"
+                    Height="20">
+                <Path Data="M 0 10  10 0  20 10 M 0 20  10 10  20 20"
+                      Stroke="#ff414041"
+                      Fill="Transparent"
+                      StrokeThickness="3" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+
+    <Style TargetType="{x:Type Controls:RrcExpander}"
+           BasedOn="{StaticResource {x:Type Expander}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Expander}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                        <DockPanel>
+                            <ToggleButton x:Name="HeaderSite"
+                                          DockPanel.Dock="Top"
+                                          IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="BackgroundBorder"
+                                                Background="Transparent">
+                                            <DockPanel x:Name="HeaderSite">
+                                                <ContentPresenter x:Name="HeaderButton"
+                                                                  DockPanel.Dock="Left"
+                                                                  Margin="3"
+                                                                  Width="10"
+                                                                  Content="{x:Null}"
+                                                                  ContentTemplate="{StaticResource DoubleUpArrowImageTemplate}"
+                                                                  FocusVisualStyle="{x:Null}"
+                                                                  VerticalAlignment="Center"
+                                                                  HorizontalAlignment="Center"/>
+                                                <ContentPresenter x:Name="HeaderContent"
+                                                                  ContentSource="Content"
+                                                                  DockPanel.Dock="Left"
+                                                                  Margin="6,3"
+                                                                  VerticalAlignment="Center"
+                                                                  HorizontalAlignment="Center"/>
+                                            </DockPanel>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger SourceName="BackgroundBorder"
+                                                     Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter TargetName="BackgroundBorder"
+                                                        Property="Background"
+                                                        Value="{StaticResource ExpanderHeaderMouseOverBrush}" />
+                                            </Trigger>
+                                            <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcExpander}}}"
+                                                         Value="{x:Static ExpandDirection.Left}">
+                                                <Setter TargetName="HeaderButton"
+                                                        Property="DockPanel.Dock"
+                                                        Value="Top" />
+                                                <Setter TargetName="HeaderContent"
+                                                        Property="DockPanel.Dock"
+                                                        Value="Top" />
+                                                <Setter TargetName="HeaderContent"
+                                                        Property="LayoutTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="-90" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter TargetName="HeaderContent"
+                                                        Property="VerticalAlignment"
+                                                        Value="Top" />
+                                                <Setter TargetName="HeaderContent"
+                                                        Property="Margin"
+                                                        Value="3,6" />
+                                                <Setter TargetName="HeaderButton"
+                                                        Property="LayoutTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="-90" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding ExpandDirection, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcExpander}}}"
+                                                               Value="{x:Static ExpandDirection.Left}" />
+                                                    <Condition Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcExpander}}}"
+                                                               Value="True" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter TargetName="HeaderButton"
+                                                        Property="LayoutTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="90" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </MultiDataTrigger>
+                                            <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcExpander}}}"
+                                                         Value="{x:Static ExpandDirection.Right}">
+                                                <Setter TargetName="HeaderButton"
+                                                        Property="DockPanel.Dock"
+                                                        Value="Top" />
+                                                <Setter TargetName="HeaderContent"
+                                                        Property="DockPanel.Dock"
+                                                        Value="Top" />
+                                                <Setter TargetName="HeaderContent"
+                                                        Property="LayoutTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="-90" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter TargetName="HeaderContent"
+                                                        Property="VerticalAlignment"
+                                                        Value="Top" />
+                                                <Setter TargetName="HeaderContent"
+                                                        Property="Margin"
+                                                        Value="3,6" />
+                                                <Setter TargetName="HeaderButton"
+                                                        Property="LayoutTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="90" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding ExpandDirection, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcExpander}}}"
+                                                               Value="{x:Static ExpandDirection.Right}" />
+                                                    <Condition Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcExpander}}}"
+                                                               Value="True" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter TargetName="HeaderButton"
+                                                        Property="LayoutTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="-90" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </MultiDataTrigger>
+                                            <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcExpander}}}"
+                                                         Value="{x:Static ExpandDirection.Down}">
+                                                <Setter TargetName="HeaderButton"
+                                                        Property="LayoutTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="180" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter TargetName="HeaderContent"
+                                                        Property="HorizontalAlignment"
+                                                        Value="Stretch" />
+                                            </DataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding ExpandDirection, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcExpander}}}"
+                                                               Value="{x:Static ExpandDirection.Down}" />
+                                                    <Condition Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType={x:Type Controls:RrcExpander}}}"
+                                                               Value="True" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter TargetName="HeaderButton"
+                                                        Property="LayoutTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="0" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </MultiDataTrigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter x:Name="ExpandSite"
+                                              DockPanel.Dock="Bottom"
+                                              Visibility="Collapsed"
+                                              Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" />
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded"
+                                 Value="True">
+                            <Setter Property="Visibility"
+                                    Value="Visible"
+                                    TargetName="ExpandSite" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ExpandDirection"
+                                           Value="Left" />
+                                <Condition Property="IsExpanded"
+                                           Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ExpandSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Left" />
+                            <Setter TargetName="HeaderSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Right" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ExpandDirection"
+                                           Value="Left" />
+                                <Condition Property="IsExpanded"
+                                           Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ExpandSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Right" />
+                            <Setter TargetName="HeaderSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Left" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ExpandDirection"
+                                           Value="Right" />
+                                <Condition Property="IsExpanded"
+                                           Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ExpandSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Right" />
+                            <Setter TargetName="HeaderSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Left" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ExpandDirection"
+                                           Value="Right" />
+                                <Condition Property="IsExpanded"
+                                           Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ExpandSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Left" />
+                            <Setter TargetName="HeaderSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Right" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ExpandDirection"
+                                           Value="Down" />
+                                <Condition Property="IsExpanded"
+                                           Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ExpandSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Top" />
+                            <Setter TargetName="HeaderSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Bottom" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ExpandDirection"
+                                           Value="Down" />
+                                <Condition Property="IsExpanded"
+                                           Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ExpandSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Bottom" />
+                            <Setter TargetName="HeaderSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Top" />
+                        </MultiTrigger>
+
+                        <!--<Trigger Property="ExpandDirection"
+                                 Value="Right">
+                            <Setter TargetName="ExpandSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Left" />
+                            <Setter TargetName="HeaderSite"
+                                    Property="DockPanel.Dock"
+                                    Value="Right" />
+                            <Setter TargetName="HeaderButton"
+                                    Property="DockPanel.Dock"
+                                    Value="Top" />
+                            <Setter TargetName="HeaderContent"
+                                    Property="LayoutTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>-->
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ExpandDirection"
+                                           Value="Left" />
+                                <Condition Property="IsExpanded"
+                                           Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="DockPanel.Dock"
+                                    Value="Left"
+                                    TargetName="ExpandSite" />
+                            <Setter Property="DockPanel.Dock"
+                                    Value="Right"
+                                    TargetName="HeaderSite" />
+                            <Setter Property="Style"
+                                    Value="{StaticResource ExpanderLeftHeaderStyle}"
+                                    TargetName="HeaderSite" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ExpandDirection"
+                                           Value="Left" />
+                                <Condition Property="IsExpanded"
+                                           Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="DockPanel.Dock"
+                                    Value="Right"
+                                    TargetName="ExpandSite" />
+                            <Setter Property="DockPanel.Dock"
+                                    Value="Left"
+                                    TargetName="HeaderSite" />
+                            <Setter Property="Style"
+                                    Value="{StaticResource ExpanderLeftHeaderStyle}"
+                                    TargetName="HeaderSite" />
+                        </MultiTrigger>-->
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Controls="clr-namespace:Rikrop.Core.Wpf.Controls">
+    <Style TargetType="{x:Type Controls:RrcEditableTextBlock}">
+        <Setter Property="FocusVisualStyle"
+                Value="{x:Null}" />
+        <Setter Property="Validation.ErrorTemplate"
+                Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Controls:RrcEditableTextBlock}">
+                    <Grid>
+                        <Controls:RrcTextBox x:Name="PART_EditArea"
+                                             Visibility="Collapsed"
+                                             Margin="0"
+                                             Text="{Binding UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource TemplatedParent}, Path=Content, Mode=TwoWay}"
+                                             HorizontalAlignment="Stretch"/>
+                        <Controls:RrcTextBlock x:Name="PART_TextBlock"
+                                               Margin="0"
+                                               Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content, Mode=TwoWay}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

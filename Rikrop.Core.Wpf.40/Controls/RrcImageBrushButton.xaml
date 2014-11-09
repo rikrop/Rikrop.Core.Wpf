@@ -1,0 +1,57 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Controls="clr-namespace:Rikrop.Core.Wpf.Controls">
+    <Style TargetType="Controls:RrcImageBrushButton">
+        <Setter Property="NormalImageBrush"
+                Value="Black" />
+        <Setter Property="MouseOverImageBrush"
+                Value="Gray" />
+        <Setter Property="PressedImageBrush"
+                Value="White" />
+        <Setter Property="DisabledImageBrush"
+                Value="DimGray" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Controls:RrcImageBrushButton">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                        <Rectangle Name="ImageRectangle"
+                                   Fill="{TemplateBinding NormalImageBrush}"
+                                   Margin="{TemplateBinding Padding}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   OpacityMask="{TemplateBinding ImageBrush}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="ImageRectangle"
+                                    Property="Fill"
+                                    Value="{Binding MouseOverImageBrush, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter TargetName="ImageRectangle"
+                                    Property="Fill"
+                                    Value="{Binding PressedImageBrush, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter TargetName="ImageRectangle"
+                                    Property="Fill"
+                                    Value="{Binding DisabledImageBrush, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
